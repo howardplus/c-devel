@@ -1,0 +1,12 @@
+---
+- name: Symlink config files in rc folder
+  file: src=/vagrant/roles/dotfiles/files/{{ item }} dest=/home/vagrant/{{ item }} state=link
+  with_items:
+    - .bashrc_mods
+    - .vimrc
+    - .vim
+- name: Create vim autoload
+  file: path={{ home }}/.vim/autoload state=directory recurse=yes owner=vagrant group=vagrant
+- name: Include .bashrc_mods in .bashrc
+  lineinfile:
+    "dest=/home/vagrant/.bashrc line='. ~/.bashrc_mods # Include local mods' insertafter=EOF"

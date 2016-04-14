@@ -1,0 +1,14 @@
+---
+- name: install vim
+  apt: name=vim state=present
+- name: create autoload directory
+  file:
+    path={{ home }}/.vim/autoload
+    state=directory
+    recurse=yes
+    owner=vagrant
+    group=vagrant
+- name: vim-plug
+  get_url:
+    url=https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest={{ home }}/.vim/autoload/plug.vim
