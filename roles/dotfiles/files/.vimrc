@@ -29,6 +29,11 @@ map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let NERDTreeIgnore=['\.o$', '\~$']
 map <C-n> :NERDTreeToggle<CR>
 
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#left_sep=' '
+let g:airline#extensions#tabline#left_alt_sep='|'
+let g:airline#extensions#tabline#fnamemod=':t'
+
 " Using vim-plug
 call plug#begin()
 Plug 'majutsushi/tagbar'
@@ -36,4 +41,6 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
