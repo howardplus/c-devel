@@ -1,0 +1,24 @@
+---
+- name: Download cmake 3.10.1
+  get_url:
+    url=https://www.cmake.org/files/v3.10/cmake-3.10.1.tar.gz
+    dest=/tmp
+    validate_certs=no
+- name: Untar cmake
+  unarchive: 
+    src=/tmp/cmake-3.10.1.tar.gz
+    dest=/tmp
+    remote_src=yes
+- name: Install cmake
+  command: ./configure
+    chdir=/tmp/cmake-3.10.1
+- name: Install cmake
+  command: make
+    chdir=/tmp/cmake-3.10.1
+- name: Install cmake
+  become: yes
+  command: make install
+    chdir=/tmp/cmake-3.10.1
+- name: Upgrade cmake
+  become: yes
+  command: update-alternatives --install /usr/bin/cmake cmake /usr/local/bin/cmake 1 --force

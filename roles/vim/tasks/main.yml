@@ -8,7 +8,6 @@
     recurse=yes
     owner=vagrant
     group=vagrant
+- name: Vundle
 - name: vim-plug
-  get_url:
-    url=https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    dest={{ home }}/.vim/autoload/plug.vim
+  command: git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim

@@ -2,10 +2,10 @@
 - name: Install apt packages for YouCompleteMe vim completion engine
   become: yes
   apt:
-    name={{ item }} state=latest
+    name={{ item }} state=present
   with_items:
     - cmake
-    - python-dev
+    - python3-dev
 - name: Check out YouCompleteMe
   git:
     repo=https://github.com/Valloric/YouCompleteMe.git

@@ -1,0 +1,65 @@
+---
+- name: Install required packages
+  become: yes
+  apt: name={{ item }} state=present
+  with_items:
+    - python-dev
+    - libdouble-conversion-dev
+    - libgoogle-glog-dev
+    - zlib1g-dev
+    - libevent-dev
+    - libssl-dev 
+    - libgtest-dev
+    - libgflags-dev
+    - libiberty-dev
+    - libbz2-dev
+    - liblz4-dev
+    - liblzma-dev
+    - libsnappy-dev
+    - libaio-dev
+    - liburcu-dev
+    - binutils-dev 
+    - libjemalloc-dev
+    - pkg-config
+    - libelf-dev
+    - libdwarf-dev
+    - libunwind8-dev
+- name: Download latest boost 1.67
+  get_url:
+    url=https://dl.bintray.com/boostorg/release/1.67.0/source/boost_1_67_0.tar.bz2
+    dest=/tmp
+- name: Untar boost
+  unarchive: 
+    src=/tmp/boost_1_67_0.tar.bz2
+    dest=/tmp
+    remote_src=yes
+- name: bootstrap boost
+  command: ./bootstrap.sh --prefix=/usr
+    chdir=/tmp/boost_1_67_0
+- name: make boost
+  command: ./b2
+    chdir=/tmp/boost_1_67_0
+- name: Install boost
+  become: yes
+  command: ./b2 install
+    chdir=/tmp/boost_1_67_0
+- name: Google test
+  get_url:
+      url=https://github.com/google/googletest/archive/release-1.8.0.tar.gz
+      dest=/tmp
+- name: Untar googletest
+  unarchive: 
+    src=/tmp/release-1.8.0.tar.gz
+    dest=/tmp
+    remote_src=yes
+- name: Build googletest
+  command: cmake -DBUILD_SHARED_LIBS=ON .
+    chdir=/tmp/googletest-release-1.8.0
+- name: Build googletest
+  command: make
+    chdir=/tmp/googletest-release-1.8.0
+- name: Install googletest
+  become: yes
+  command: make install
+    chdir=/tmp/googletest-release-1.8.0
+

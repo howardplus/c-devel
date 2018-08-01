@@ -1,17 +1,19 @@
 ---
 - hosts: all
-  become: true
+  become: yes
+  gather_facts: no
   vars:
       home: /home/vagrant
       document_root: /vagrant
-      go_path: /vagrant
   pre_tasks:
+      - name: 'install python2'
+        raw: sudo apt-get -y install python-simplejson
       - name: Update apt cache
         apt:
           update_cache=yes
           cache_valid_time=7200
       - name: Install required packages
-        apt: name={{ item }} state=installed
+        apt: name={{ item }} state=present
         with_items:
          - build-essential
          - git
@@ -25,6 +27,9 @@
          - tmux
          - man-db
   roles:
-      - { role: dotfiles, become: false }
-      - { role: vim, become: false }
-      - { role: youcompleteme, become: false }
+      - { role: dotfiles, become: no }
+      - { role: vim, become: no }
+      - { role: cmake, become: no }
+      - { role: g++7, become: yes }
+      - { role: depend, become: no }
+      - { role: youcompleteme, become: no }
