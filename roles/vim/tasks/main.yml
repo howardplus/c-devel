@@ -8,6 +8,11 @@
     recurse=yes
     owner=vagrant
     group=vagrant
+- name: Vundle Cleanup
+  file:
+    path={{ home }}/.vim/bundle/Vundle.vim
+    state=absent
+    owner=vagrant
+    group=vagrant
 - name: Vundle
-- name: vim-plug
-  command: git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  command: git clone https://github.com/VundleVim/Vundle.vim.git {{ home }}/.vim/bundle/Vundle.vim
