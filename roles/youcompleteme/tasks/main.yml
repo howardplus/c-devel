@@ -10,6 +10,8 @@
   git:
     repo=https://github.com/Valloric/YouCompleteMe.git
     dest={{ home }}/src/YouCompleteMe
+- name: Create clang_archives directory
+  file: path={{ home }}/.vim/bundle/YouCompleteMe/third_party/ycmd/clang_archives state=directory
 - name: Download libclang-7.0.0
   get_url:
     url=https://dl.bintray.com/micbou/libclang/libclang-7.0.0-x86_64-unknown-linux-gnu.tar.bz2
@@ -19,8 +21,6 @@
     src={{ home }}/src/YouCompleteMe
     dest={{ home }}/.vim/bundle/YouCompleteMe
     state=link
-- name: Create clang_archives directory
-  file: path={{ home }}/.vim/bundle/YouCompleteMe/third_party/ycmd/clang_archives state=directory
 - name: Compile YouCompleteMe binaries
   command: python ./install.py --clang-completer
     chdir={{ home }}/src/YouCompleteMe
