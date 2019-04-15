@@ -19,5 +19,5 @@
     dest={{ home }}/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/../clang_archives/
 - name: Compile YouCompleteMe binaries
   command: python ./install.py --clang-completer
-    chdir={{ home }}/src/YouCompleteMe
+    chdir={{ home }}/.vim/bundle/YouCompleteMe
     creates={{ home }}/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so

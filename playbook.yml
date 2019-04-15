@@ -19,6 +19,8 @@
             - tig
             - gdb
             - cgdb
+            - autoconf
+            - libtool
             - make
             - tree
             - htop
